@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" version="4.0">
+  <!-- <display-name>BookMyRoom</display-name>
+  <welcome-file-list>
+    <welcome-file>views/Login.jsp</welcome-file>
+  </welcome-file-list> -->
+<!--   <servlet>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>com.saintrose.controller.authentication.LoginServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/customerlogin</url-pattern>
+  </servlet-mapping> -->  
+
+ <servlet>
+    <servlet-name>CustomersServlet</servlet-name>
+    <servlet-class>com.saintrose.customer.service.CustomersServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CustomersServlet</servlet-name>
+    <url-pattern>/userCustomerLoggedIn</url-pattern>
+  </servlet-mapping>
+</web-app>
