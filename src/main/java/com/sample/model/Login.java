@@ -10,7 +10,7 @@ public class Login {
 
     }
 
-    public static void makeJDBCConnection() {
+    public static Connection makeJDBCConnection() {
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             log("Login JDBC Driver is Registered!");
@@ -23,13 +23,24 @@ public class Login {
             mysqlConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/userlogin", "csc505", "password");
             if (mysqlConnection != null) {
                 log("------------------------Connection Success!----------------------------");
+                return mysqlConnection;
             } else {
                 log("------------------------Connection Failed!-----------------------------");
+                return null;
             }
         } catch (SQLException e) {
             log("Mysql Connection Failed!");
             e.printStackTrace();
-            return;
+            return null;
+        }
+    }
+
+    public static void closeJDBCConnection(Connection con) {
+        try {
+            con.close();
+        } catch (SQLException e) {
+            log("Connection is not closed.");
+            e.printStackTrace();
         }
     }
 
