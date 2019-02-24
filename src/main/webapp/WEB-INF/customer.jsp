@@ -9,14 +9,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 
-<%--  <link rel="stylesheet" href="${pageContext.request.contextPath}/BookMyRoom/WEB-INF/css/bootstrap.min.css"> --%>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
- <!--  <link href = "https://code.jquery.com/ui/1.12.4/themes/ui-lightness/jquery-ui.css"
-         rel = "stylesheet"> -->
+ <link rel="stylesheet" href="${pageContext.request.contextPath}/BookMyRoom/WEB-INF/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<!--  <script src = "https://code.jquery.com/ui/1.12.4/jquery-ui.js"></script> -->
-<%--  <script src="${pageContext.request.contextPath}/BookMyRoom/WEB-INF/JS/bootstrap.min.js"></script> --%>
- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/BookMyRoom/WEB-INF/JS/bootstrap.min.js"></script>
 <style type="text/css">
 
 .disabledTab{
@@ -84,14 +79,13 @@ input[type=submit]:hover {
 </style>
 </head>
 <body>
-<input type="hidden" id="test" name="test" value="<%= request.getAttribute("firstname")%>"></input>
  <div class="bs-example">
   
         <!-- Brand and toggle get grouped for better mobile display -->
         
   <ul class="nav nav-tabs">
-        <li class="active" ><a data-toggle="tab" href="#userProfile">User Profile</a></li>
-        <li><a id="pra" data-toggle="tab" href="#bookReservation">Book Reservation</a></li>
+        <li class="active"><a data-toggle="tab" href="#userProfile">User Profileupper</a></li>
+        <li><a data-toggle="tab" href="#bookReservation">Book Reservation</a></li>
          <li><a data-toggle="tab" href="#serviceRequest">Service Request</a></li>
     </ul>
     <div class="tab-content">
@@ -99,12 +93,13 @@ input[type=submit]:hover {
             <%@include file="/userRegistration.jsp" %>
         </div>
         <div id="bookReservation" class="tab-pane fade">
-        	<%@include file="/bookReservation.jsp" %>
+            <h3>Section B</h3>
+            <p>Vestibulum nec erat eu nulla rhoncus fringilla ut non neque. Vivamus nibh urna, ornare id gravida ut, mollis a magna. Aliquam porttitor condimentum nisi, eu viverra ipsum porta ut. Nam hendrerit bibendum turpis, sed molestie mi fermentum id. Aenean volutpat velit sem. Sed consequat ante in rutrum convallis. Nunc facilisis leo at faucibus adipiscing.</p>
         </div>
         
          <div id="serviceRequest" class="tab-pane fade">
-            <h3>Please raise room service request by filling up below form.</h3>
-            <p></p>
+            <h3>Section C</h3>
+            <p>Vestibulum nec erat eu nulla rhoncus fringilla ut non neque. Vivamus nibh urna, ornare id gravida ut, mollis a magna. Aliquam porttitor condimentum nisi, eu viverra ipsum porta ut. Nam hendrerit bibendum turpis, sed molestie mi fermentum id. Aenean volutpat velit sem. Sed consequat ante in rutrum convallis. Nunc facilisis leo at faucibus adipiscing.</p>
         </div>
       
         
@@ -129,58 +124,28 @@ input[type=submit]:hover {
 <script type="text/javascript">
 
 
-$("a").click(function() {
-
-    $("a.active").removeClass("active");
-    $(this).addClass("active");
-    var value = $(this).attr("href");
-    
-      var hash = window.location.hash.split('#')[0];
-	  window.location.replace(hash+value);
-  });
-  
-  
-/* $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
-	
+$('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 	  var target = $(e.target).attr("href"); // activated tab
 	  //var check=urlInitial.substr(0,4);
 	  var hash = window.location.hash.split('#')[0];
 	  window.location.replace(hash+target);
-	}); */
+	});
 
-	$('#submitform').click(function() {
-		
-		 $('.nav-tabs li:eq(1) a').addClass('dummy');
-		$('.nav-tabs a:last').addClass('dummy'); 
-	//	$(".disabledTab").removeClass("disabledTab");
-      // $(".disabledTab").removeClass("disabledTab");
-     /*  $('.nav-tabs li:eq(1) a').addClass('active');
-		$('.nav-tabs a:last').addClass('active'); */
-		
-		$("#cusreg").submit();
+	$('#submitform').click(function(e) {
+
+		$('.nav-tabs li:eq(1) a').removeClass('disabledTab');
+		$('.nav-tabs a:last').removeClass('disabledTab');
 	});
 
 	$(document).ready(function() {
-		
 		urlInitial = window.location;
 		var valnew = $(".nav-tabs").find(".active a").attr("href");
 		var url = urlInitial+valnew;
 		
 		window.location.replace(url);
-		
-		    if($('#test').val() == ' '){
-			  $('.nav-tabs li:eq(1) a').addClass('disabledTab');
-				$('.nav-tabs a:last').addClass('disabledTab'); 
-	
 
-		   }else{
-			   
-			   $("#showme").show();
-		   }
-		
-			
-			  
-	
+		$('.nav-tabs li:eq(1) a').addClass('disabledTab');
+		$('.nav-tabs a:last').addClass('disabledTab');
 		
 		 
 	});
