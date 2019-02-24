@@ -17,7 +17,7 @@
     <h1>
         Welcome Employee!
     </h1>
-    <form action="Employee">
+    <form>
 
         <table border="2">
             <tr>
@@ -46,7 +46,7 @@
             <td><%=rs.getString("timestamp") %></td>
             <td><%=rs.getString("service_type") %></td>
             <td><%=rs.getString("owner") %></td>
-            <td><%=rs.getInt("room") %></td></tr>
+            <td><%=rs.getString("room") %></td></tr>
             <%
 
                 }
@@ -67,6 +67,18 @@
 
         %>
 
+    </form>
+    <h4>Please enter the Room number for the service you want to assign to your self:</h4>
+    <form action="Employee">
+        <table>
+            <tr>
+                <td>Enter the Room Number:</td>
+                <td><input type="" name="id"></td>
+            </tr>
+            <tr>
+                <td colspan="2"><input type="submit" value="Search"></td>
+            </tr>
+        </table>
     </form>
 </center>
 </body>
