@@ -15,6 +15,8 @@ import java.io.IOException;
 @WebServlet("/BookMyRoom")
 
 public class LoginServlet extends HttpServlet {
+	
+	private static String SPACE=" ";
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
         // Grabbing the value of Roles from the submission
@@ -56,6 +58,14 @@ public class LoginServlet extends HttpServlet {
             } else if (r.equals(Roles.Manager)){
                 req.getRequestDispatcher("manager.jsp").forward(req, res);
             } else if (r.equals(Roles.Customer)){
+            	req.setAttribute("firstname",SPACE);
+            	req.setAttribute("middlename",SPACE);
+            	req.setAttribute("lastname",SPACE);
+            	req.setAttribute("email",SPACE);
+            	req.setAttribute("address",SPACE);
+            	req.setAttribute("dob",SPACE);
+            	req.setAttribute("ssn",SPACE);
+        		
                 req.getRequestDispatcher("customer.jsp").forward(req, res);
             } else {
                 String errorMessage = "Something is wrong.";

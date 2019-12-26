@@ -9,11 +9,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Insert title here</title>
 
-<%--  <link rel="stylesheet" href="${pageContext.request.contextPath}/BookMyRoom/WEB-INF/css/bootstrap.min.css"> --%>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ <link rel="stylesheet" href="${pageContext.request.contextPath}/BookMyRoom/WEB-INF/css/bootstrap.min.css">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-<%--  <script src="${pageContext.request.contextPath}/BookMyRoom/WEB-INF/JS/bootstrap.min.js"></script> --%>
- <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="${pageContext.request.contextPath}/BookMyRoom/WEB-INF/JS/bootstrap.min.js"></script>
 <style type="text/css">
 
 .disabledTab{
@@ -86,7 +84,7 @@ input[type=submit]:hover {
         <!-- Brand and toggle get grouped for better mobile display -->
         
   <ul class="nav nav-tabs">
-        <li class="active"><a data-toggle="tab" href="#userProfile">User Profilelower</a></li>
+        <li class="active"><a data-toggle="tab" href="#userProfile">User Profileupper</a></li>
         <li><a data-toggle="tab" href="#bookReservation">Book Reservation</a></li>
          <li><a data-toggle="tab" href="#serviceRequest">Service Request</a></li>
     </ul>
@@ -95,12 +93,13 @@ input[type=submit]:hover {
             <%@include file="/userRegistration.jsp" %>
         </div>
         <div id="bookReservation" class="tab-pane fade">
-        	<%@include file="/bookReservation.jsp" %>
+            <h3>Section B</h3>
+            <p>Vestibulum nec erat eu nulla rhoncus fringilla ut non neque. Vivamus nibh urna, ornare id gravida ut, mollis a magna. Aliquam porttitor condimentum nisi, eu viverra ipsum porta ut. Nam hendrerit bibendum turpis, sed molestie mi fermentum id. Aenean volutpat velit sem. Sed consequat ante in rutrum convallis. Nunc facilisis leo at faucibus adipiscing.</p>
         </div>
         
          <div id="serviceRequest" class="tab-pane fade">
-            <h3>Please raise room service request by filling up below form.</h3>
-            <p></p>
+            <h3>Section C</h3>
+            <p>Vestibulum nec erat eu nulla rhoncus fringilla ut non neque. Vivamus nibh urna, ornare id gravida ut, mollis a magna. Aliquam porttitor condimentum nisi, eu viverra ipsum porta ut. Nam hendrerit bibendum turpis, sed molestie mi fermentum id. Aenean volutpat velit sem. Sed consequat ante in rutrum convallis. Nunc facilisis leo at faucibus adipiscing.</p>
         </div>
       
         
@@ -132,11 +131,10 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 	  window.location.replace(hash+target);
 	});
 
-	$('#submitform').click(function() {
-      
-       $(".disabledTab").removeClass("disabledTab");
-   /*    $('.nav-tabs li:eq(1) a').addClass('active');
-		$('.nav-tabs a:last').addClass('active'); */
+	$('#submitform').click(function(e) {
+
+		$('.nav-tabs li:eq(1) a').removeClass('disabledTab');
+		$('.nav-tabs a:last').removeClass('disabledTab');
 	});
 
 	$(document).ready(function() {
@@ -146,8 +144,8 @@ $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
 		
 		window.location.replace(url);
 
-		/* $('.nav-tabs li:eq(1) a').addClass('disabledTab');
-		$('.nav-tabs a:last').addClass('disabledTab'); */
+		$('.nav-tabs li:eq(1) a').addClass('disabledTab');
+		$('.nav-tabs a:last').addClass('disabledTab');
 		
 		 
 	});

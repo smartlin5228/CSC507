@@ -20,7 +20,7 @@ public class Login {
         }
 
         try {
-            mysqlConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/userlogin", "csc505", "password");
+            mysqlConnection = DriverManager.getConnection("jdbc:mysql://localhost:3306/csc505", "root", "Balu@2121");
             if (mysqlConnection != null) {
                 log("------------------------Connection Success!----------------------------");
                 return mysqlConnection;
@@ -46,19 +46,112 @@ public class Login {
 
     public static void addUserToDB(String username, String password, String role) throws SQLException {
         log("------------------------Local Login-----------------------------");
+        
+        String id="1";
         makeJDBCConnection();
         String defaultTableName = "userlogin";
-        String insertQueryStatement = "insert into userlogin values (?,?,?)";
+        String insertQueryStatement = "insert into userlogin values (?,?,?,?)";
         userStat = mysqlConnection.prepareStatement(insertQueryStatement);
-        userStat.setString(1, username);
-        userStat.setString(2, password);
-        userStat.setString(3, role);
+        userStat.setString(1,id);
+        userStat.setString(2, username);
+        userStat.setString(3, password);
+        userStat.setString(4, role);
         userStat.executeUpdate();
         log(username + " Added Successfully!");
         userStat.close();
         mysqlConnection.close();
     }
-
+    public static void addCustomerProfileToDB(CustomerProfile profile) throws SQLException {
+        log("------------------------Local Login-----------------------------");
+        
+        String insertQueryStatement;
+        int r=getCustomerFromDB(profile.getSsn());
+        
+        if(r==0) {
+        	 insertQueryStatement = "insert into Customer_Profile values (?,?,?,?,?,?,?,?)";
+        }else {
+        	
+        		insertQueryStatement="update Customer_Profile set fullname=? , DOB=? , email=? , address=? where ssn=? ";
+        }
+        int temid=getMaxIdFromCustomerDB()+1;
+        String id=Integer.toString(temid);
+        makeJDBCConnection();
+        String defaultTableName = "userlogin";
+        
+        
+        String fullName= profile.getFirstname().concat(" ").concat(profile.getMiddlename()).concat(" ").concat(profile.getLastname());
+        
+        userStat = mysqlConnection.prepareStatement(insertQueryStatement);
+        
+       
+        if(r==0) {
+        	 userStat.setString(1,id);
+             userStat.setString(2,fullName);
+             userStat.setString(3, profile.getDob());
+             userStat.setString(4, profile.getEmail());
+             userStat.setString(5, profile.getSsn());
+             userStat.setString(6, profile.getAddress());
+        	userStat.setString(7,"0");
+            userStat.setString(8,"0");
+        }else {
+        	
+        	
+             userStat.setString(1,fullName);
+             userStat.setString(2, profile.getDob());
+             userStat.setString(3, profile.getEmail());
+             userStat.setString(4, profile.getAddress());
+             userStat.setString(5, profile.getSsn());
+        }
+       
+        userStat.executeUpdate();
+        log(fullName + " Added Successfully!");
+        userStat.close();
+        mysqlConnection.close();
+    }
+    
+    public static int getCustomerFromDB(String ssn) {
+    	int res=0;
+        try {
+            makeJDBCConnection();
+            String getQueryStatement = "SELECT * FROM Customer_Profile where ssn in(?)";
+            userStat = mysqlConnection.prepareStatement(getQueryStatement);
+            userStat.setString(1,ssn);
+            ResultSet rs = userStat.executeQuery();
+            while (rs.next()) {
+                res= Integer.parseInt(rs.getString("id"));
+               
+            }
+            userStat.close();
+            mysqlConnection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return res;
+    }
+    
+    
+    public static int getMaxIdFromCustomerDB() {
+    	int res=0;
+        try {
+            makeJDBCConnection();
+            String getQueryStatement = "SELECT max(id) max_id from Customer_Profile";
+            userStat = mysqlConnection.prepareStatement(getQueryStatement);
+            ResultSet rs = userStat.executeQuery();
+            while (rs.next()) {
+                res= rs.getInt("max_id");
+               
+            }
+            userStat.close();
+            mysqlConnection.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return res;
+    }
+    
+    
     public static void getUserFromDB(String username, String password) {
         try {
             makeJDBCConnection();
